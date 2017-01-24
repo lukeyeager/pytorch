@@ -22,6 +22,7 @@ addons:
         packages:
             - gcc-4.8
             - g++-4.8
+            - libopenblas-dev
 
 # This reportedly works around an issue downloading packages from pypi on
 # travis.  Consider removing this after the underlying issue is fixed.
