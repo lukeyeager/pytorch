@@ -40,8 +40,25 @@ sudo: false
 matrix:
     fast_finish: true
     include:
-        env: LINT_CHECK
-        python: "2.7"
-        addons: true
-        install: pip install pep8
-        script: pep8
+        - env: LINT_CHECK
+          python: "2.7"
+          addons: true
+          install: pip install pep8
+          script: pep8
+        - env: DOCKER_IMAGE=quay.io/pypa/manylinux1_x86_64
+          python: "2.7"
+          services:
+              - docker
+          install: docker pull $DOCKER_IMAGE
+          script:
+              - docker run -v `pwd`:/pytorch $DOCKER_IMAGE /pytorch/.travis/build-wheels.sh
+              - ls wheelhouse/
+          deploy:
+              - provider: pypi
+              - username: "TODO"
+              - password: "TODO"
+              - skip_cleanup: true
+              - on:
+                  repo: pytorch/pytorch
+                  tags: true
+
