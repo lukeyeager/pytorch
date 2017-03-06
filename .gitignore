@@ -1,6 +1,7 @@
 build/
 dist/
 torch.egg-info/
+pytorch.egg-info/
 */**/__pycache__
 torch/csrc/generic/TensorMethods.cpp
 torch/lib/*.so*
